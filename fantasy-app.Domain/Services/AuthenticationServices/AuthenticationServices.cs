@@ -8,14 +8,28 @@ namespace fantasy_app.Domain.Services.AuthenticationServices
 {
     public class AuthenticationServices : IAuthenticationService
     {
+        private readonly IAccountService _accountService;
+
+        public AuthenticationServices(IAccountService accountService)
+        {
+            _accountService = accountService;
+        }
+
         public Task<string> Login(string username, string password)
         {
             throw new NotImplementedException();
         }
 
-        public Task<string> Register(string username, string password, string email, string phoneNumber)
+        public async Task<string> Register(string username, string password, string email, string phoneNumber)
         {
-            throw new NotImplementedException();
+            if(await _accountService.Register(username, password, email, phoneNumber))
+            {
+                return "token";
+            }
+            else
+            {
+                return "false";
+            }
         }
     }
 }

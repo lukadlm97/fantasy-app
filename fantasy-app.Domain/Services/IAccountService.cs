@@ -10,5 +10,6 @@ namespace fantasy_app.Domain.Services
     {
         Task<IdentityUser> GetByUsername(string username);
         Task<IdentityUser> GetByEmail(string email);
+        Task<bool> Register(string username, string password, string email, string phone);
     }
 }
