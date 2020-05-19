@@ -2,6 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fantasy_app.Domain.Services;
+using fantasy_app.Domain.Services.AuthenticationServices;
+using fantasy_app.Domain.Services.PasswordServices;
+using fantasy_app.EntityFramework;
+using fantasy_app.EntityFramework.Services;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,6 +41,12 @@ namespace fantasy_app.API
               options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
               );
 
+            services.AddSingleton<DesignTimeDbContextFactory>();
+            services.AddSingleton<IAuthenticationService, AuthenticationServices>();
+            services.AddSingleton<IPasswordService, PasswordService>();
+            services.AddSingleton<IAccountService, AccountService>();
+        
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,10 +63,7 @@ namespace fantasy_app.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }

@@ -25,18 +25,25 @@ namespace fantasy_app.API.Controllers
 
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterViewModel registerUser)
+        [HttpGet]
+        public async Task<IActionResult> Example()
         {
-            if (_passwordService.CheckIsPasswordIsConfirmed(registerUser.Password, registerUser.ConfirmPassword))
-            {
-                return BadRequest(new { message="Not confirmed password"});
-            }
-            if (string.IsNullOrEmpty(await _authenticationService.Register(registerUser.Username,registerUser.Password,registerUser.Email,registerUser.Phone)))
-            {
-                return BadRequest(new { message="Cant register user."});
-            }
+            return Ok(new int[] { 12,1,2,3,2});
+        }
+
+        [HttpPost]
+ 
+        public async Task<IActionResult> Register(string message)
+        {
+            //if (_passwordService.CheckIsPasswordIsConfirmed(registerUser.Password, registerUser.ConfirmPassword))
+            //{
+            //    return BadRequest(new { message="Not confirmed password"});
+            //}
+            //if (string.IsNullOrEmpty(await _authenticationService.Register(registerUser.Username,registerUser.Password,registerUser.Email,registerUser.Phone)))
+            //{
+            //    return BadRequest(new { message="Cant register user."});
+            //}
+
             return Ok();
         }
     }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\fantasy-app.Domain\fantasy-app.Domain.csproj" />
+    <ProjectReference Include="..\fantasy-app.EntityFramework\fantasy-app.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

@@ -24,7 +24,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace fantasy_app.EntityFramework.Services
 {
-    public class AccountService
+    public class AccountService:IAccountService
     {
        
         private readonly DesignTimeDbContextFactory _contextFactory;
@@ -35,9 +35,39 @@ namespace fantasy_app.EntityFramework.Services
              _contextFactory = dbContext;     
         }
 
+        public Task<Microsoft.AspNet.Identity.EntityFramework.IdentityUser> Create(Microsoft.AspNet.Identity.EntityFramework.IdentityUser enity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Microsoft.AspNet.Identity.EntityFramework.IdentityUser> Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityUser>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Microsoft.AspNet.Identity.EntityFramework.IdentityUser> GetByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Microsoft.AspNet.Identity.EntityFramework.IdentityUser> GetByUsername(string username)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> Register(string username,string password,string email,string phone)
         {
-            var user = new IdentityUser
+            var user = new Microsoft.AspNetCore.Identity.IdentityUser
             { 
                 UserName = username,
                 Email = email,
@@ -48,13 +78,16 @@ namespace fantasy_app.EntityFramework.Services
 
             using(ApplicationDbContext context = _contextFactory.CreateDbContext(null))
             {
-                EntityEntry<IdentityUser> entity = await context.Set<IdentityUser>().AddAsync(user);
+                EntityEntry<Microsoft.AspNetCore.Identity.IdentityUser> entity = await context.Set<Microsoft.AspNetCore.Identity.IdentityUser>().AddAsync(user);
                 await context.SaveChangesAsync();
 
                 return entity.IsKeySet;
             }
         }
 
-        
+        public Task<Microsoft.AspNet.Identity.EntityFramework.IdentityUser> Update(int id, Microsoft.AspNet.Identity.EntityFramework.IdentityUser entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
