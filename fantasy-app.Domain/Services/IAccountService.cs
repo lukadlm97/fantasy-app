@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace fantasy_app.Domain.Services
 {
-    public interface IAccountService:IDataService<IdentityUser>
+    public interface IAccountService
     {
         Task<IdentityUser> GetByUsername(string username);
         Task<IdentityUser> GetByEmail(string email);
-        Task<bool> Register(string username, string password, string email, string phone);
+        Task<string> Register(string username, string password, string email, string phone);
+        Task<string> Login(string username, string password);
     }
 }
